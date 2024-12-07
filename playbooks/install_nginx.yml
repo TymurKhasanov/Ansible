@@ -1,0 +1,21 @@
+---
+- name: Install NGINX and deploy index.html
+  hosts: vm2
+  become: yes
+  tasks:
+    - name: Install NGINX
+      apt:
+        name: nginx
+        state: present
+
+    - name: Create index.html
+      copy:
+        content: "Ansible the best"
+        dest: /var/www/html/index.html
+        mode: '0644'
+
+    - name: Ensure NGINX is running
+      service:
+        name: nginx
+        state: started
+        enabled: yes

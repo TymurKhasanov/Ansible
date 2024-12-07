@@ -1,0 +1,10 @@
+---
+- name: Execute ls /etc command and save output
+  hosts: all
+  tasks:
+    - name: Run ls /etc command
+      command: ls /etc
+      register: ls_output
+    - name: Display output
+      debug:
+        msg: "{{ ls_output.stdout }}"
